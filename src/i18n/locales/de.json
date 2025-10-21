@@ -1,0 +1,41 @@
+{
+  "common": {
+    "email": "E-Mail-Adresse",
+    "password": "Passwort",
+    "confirmPassword": "Passwort bestätigen",
+    "signIn": "Anmelden",
+    "signUp": "Registrieren",
+    "forgotPassword": "Passwort vergessen?",
+    "createAccount": "Konto erstellen",
+    "alreadyHaveAccount": "Haben Sie bereits ein Konto?",
+    "dontHaveAccount": "Haben Sie noch kein Konto?",
+    "rememberPassword": "Passwort merken?",
+    "confirm": "Bestätigen",
+    "upload": "Hochladen",
+    "selectRole": "Rolle auswählen",
+    "profilePicture": "Profilbild",
+    "welcomeBack": "Willkommen zurück",
+    "createYourAccount": "Erstellen Sie Ihr Konto",
+    "enterEmail": "E-Mail eingeben",
+    "enterPassword": "Passwort eingeben",
+    "confirmPasswordPlaceholder": "Passwort bestätigen",
+    "chooseRole": "Rolle wählen"
+  },
+  "roles": {
+    "admin": "Administrator",
+    "editor": "Redakteur",
+    "proofreading": "Korrekturlesen",
+    "graphics": "Grafik",
+    "hotel_owner": "Hotelbesitzer",
+    "partner": "Partner"
+  },
+  "validation": {
+    "passwordsDoNotMatch": "Passwörter stimmen nicht überein!",
+    "accountCreatedSuccessfully": "Konto erfolgreich erstellt!",
+    "onlyImageFiles": "Sie können nur Bilddateien hochladen!",
+    "imageTooLarge": "Bild muss kleiner als 2MB sein!"
+  },
+  "navigation": {
+    "goToHome": "Zur Startseite"
+  }
+}
