@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next';
 import {IoIosMail, IoIosUnlock} from "react-icons/io"
 import {FaRegEyeSlash, FaRegEye} from "react-icons/fa";
 import Logo from "@/assets/logo.webp"
+import LanguageSwitcher from "../../components/ui/languageSwitcher";
 const Login = () => {
     const {t} = useTranslation();
     const [email, setEmail] = useState("");
@@ -25,6 +26,9 @@ const Login = () => {
             <div className='h-screen w-screen hidden lg:flex bg-white'>
                 <div className='w-1/2 items-center justify-center flex flex-col p-8'>
                     <div className='w-full max-w-md space-y-4'>
+                        <div className='flex justify-end'>
+                            <LanguageSwitcher/>
+                        </div>
                         <div className='justify-center flex '>
                             <img src={Logo} alt="Logo" className='w-1/2'/>
                         </div>
@@ -132,8 +136,8 @@ const Login = () => {
                         <div className="absolute top-4 left-1/2 transform -translate-x-1/2 w-16 h-1 z-2 bg-emerald-400 rounded-full"></div>
                         <div className="sm:p-8 p-4 pt-12">
                             {/* Language Switcher */}
-                            <div className="flex justify-end mb-4">
-                                Language button
+                            <div className='flex justify-end'>
+                                <LanguageSwitcher/>
                             </div>
                             
                             {/* Main Logo */}
