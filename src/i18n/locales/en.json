@@ -1,0 +1,41 @@
+{
+  "common": {
+    "email": "Email address",
+    "password": "Password",
+    "confirmPassword": "Confirm Password",
+    "signIn": "Sign In",
+    "signUp": "Sign Up",
+    "forgotPassword": "Forgot your password?",
+    "createAccount": "Create now",
+    "alreadyHaveAccount": "Already have an account?",
+    "dontHaveAccount": "Don't have an account?",
+    "rememberPassword": "Remember your password?",
+    "confirm": "Confirm",
+    "upload": "Upload",
+    "selectRole": "Select Role",
+    "profilePicture": "Profile Picture",
+    "welcomeBack": "Welcome back",
+    "createYourAccount": "Create your account",
+    "enterEmail": "Enter your email",
+    "enterPassword": "Enter your password",
+    "confirmPasswordPlaceholder": "Confirm your password",
+    "chooseRole": "Choose your role"
+  },
+  "roles": {
+    "admin": "Admin",
+    "editor": "Editor",
+    "proofreading": "Proofreading",
+    "graphics": "Graphics",
+    "hotel_owner": "Hotel Owner",
+    "partner": "Partner"
+  },
+  "validation": {
+    "passwordsDoNotMatch": "Passwords do not match!",
+    "accountCreatedSuccessfully": "Account created successfully!",
+    "onlyImageFiles": "You can only upload image files!",
+    "imageTooLarge": "Image must be smaller than 2MB!"
+  },
+  "navigation": {
+    "goToHome": "Go to Home"
+  }
+}
