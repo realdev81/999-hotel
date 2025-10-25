@@ -2,18 +2,24 @@ import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import AddImageModal from "../ui/AddImageModal";
 import SimpleImageModal from "../ui/SimpleImageModal";
-import { FaEye, FaTrash } from "react-icons/fa";
-import { Upload, Image } from "antd";
-import type { UploadProps, UploadFile } from "antd";
+
 import { MdPhotoSizeSelectActual } from "react-icons/md";
 import { BsCloudUpload } from "react-icons/bs";
+
+import { Upload, Image } from "antd";
+import type { UploadProps, UploadFile } from "antd";
+import { FaEye, FaTrash } from "react-icons/fa";
+
 import { Role } from "../../interfaces/HotelView";
 import { maxAboutSectionTextareaLength, maxHotelInfoHotelTextareaLength, minTextareaLength, hotelViewHighlightOptions } from "../../utils/Constants";
+
 // @ts-ignore
 import image1 from "../../assets/new/HotelOwnerForm/image1.png";
 // @ts-ignore
 import image2 from "../../assets/new/HotelOwnerForm/image2.png";
+// @ts-ignore
 import image3 from "../../assets/new/HotelOwnerForm/image3.png";
+
 interface FormData {
   hotelName: string;
   name: string;
@@ -42,9 +48,22 @@ interface FormData {
   highlight4: boolean;
   highlight5: boolean;
   highlight6: boolean;
+  highlight7: boolean;
+  highlight8: boolean;
+  highlight9: boolean;
+  highlight10: boolean;
+  manageQuoteText: string;
+  manageNameOrRole: string;
   managerName: string;
-  managerRole: string;
-  otherManagerRole: string;
+  quoteManagerRole: string;
+  quoteOtherManagerRole: string;
+  interviewManagerRole: string;
+  interviewOtherManagerRole: string;
+  answer1: string;
+  answer2: string;
+  answer3: string;
+  answer4: string;
+  answer5: string;
   addOtherHighlights: boolean;
   customHighlights: string[];
   imageCopyrightAgreed: boolean;
@@ -56,7 +75,7 @@ interface FormData {
   flagAttachment: string;
 }
 
-const HotelOwnerFormpre = () => {
+const HotelOwnerFormExclusive = () => {
   const { t } = useTranslation();
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [isSimpleModalVisible, setIsSimpleModalVisible] = useState(false);
@@ -92,9 +111,22 @@ const HotelOwnerFormpre = () => {
     highlight4: false,
     highlight5: false,
     highlight6: false,
+    highlight7: false,
+    highlight8: false,
+    highlight9: false,
+    highlight10: false, 
+    manageQuoteText: "",
+    manageNameOrRole: "",
     managerName: "",
-    managerRole: "",
-    otherManagerRole: "",
+    quoteManagerRole: "",
+    quoteOtherManagerRole: "",
+    interviewManagerRole: "",
+    interviewOtherManagerRole: "",
+    answer1: "",
+    answer2: "",
+    answer3: "",
+    answer4: "",
+    answer5: "",
     addOtherHighlights: false,
     customHighlights: [],
     imageCopyrightAgreed: false,
@@ -164,11 +196,11 @@ const HotelOwnerFormpre = () => {
   };
 
   const handleChange: UploadProps["onChange"] = ({ fileList: newFileList }) => {
-    // Limit to only one file
-    const limitedFileList = newFileList.slice(-1);
-    setFileList(limitedFileList);
-  };
-
+      // Limit to only one file
+      const limitedFileList = newFileList.slice(-1);
+      setFileList(limitedFileList);
+    };
+  
   const getBase64 = (file: File): Promise<string> =>
     new Promise((resolve, reject) => {
       const reader = new FileReader();
@@ -621,7 +653,7 @@ const HotelOwnerFormpre = () => {
                       type="checkbox"
                       id={option}
                       name={option}
-                      checked={formData[option]}
+                      checked={formData[option as keyof typeof formData]}
                       onChange={handleInputChange}
                       className="h-5 w-5 text-emerald-600 focus:ring-emerald-500 border-gray-300 rounded cursor-pointer"
                     />
@@ -640,7 +672,87 @@ const HotelOwnerFormpre = () => {
               </div>
             </div>
 
-            {/* General Manager / Owner Section */}
+            {/* Manager Quote Section */}
+            <div className="space-y-4">
+              <h2 className="text-lg font-semibold text-black">
+                {t("hotelOwner.manageQuote")}
+              </h2>
+              <div className="grid grid-cols-1 gap-4">
+                <div>
+                  <label className="block text-sm font-medium text-black mb-2">
+                    {t("hotelOwner.manageQuoteText")}
+                  </label>
+
+                  <div className="relative">
+                    <textarea
+                      name="manageQuoteText"
+                      value={formData.manageQuoteText}
+                      onChange={handleInputChange}
+                      rows={5}
+                      minLength={75}
+                      maxLength={150}
+                      className={textareaClass}
+                    />
+                    <div className="absolute bottom-2 right-2 text-xs text-gray-600">
+                      {t("hotelOwner.maxCharacters", { count: 150 })}
+                    </div>
+                  </div>
+
+                  <div>
+                    <label className="block text-sm font-medium text-black mb-2">
+                      {t("hotelOwner.name")}
+                    </label>
+                    <input
+                      name="manageNameOrRole"
+                      value={formData.manageNameOrRole}
+                      onChange={handleInputChange}
+                      className={inputClass}
+                    />
+                  </div>
+                </div>
+
+                <div className="space-y-3">
+                  <label className="block text-sm font-medium text-black mb-2">
+                    {t("hotelOwner.role")}
+                  </label>
+
+                  {Object.values(Role).map(role => (
+                    <div key={role} className="flex items-center">
+                      <input
+                        type="radio"
+                        id={`quote-${role}`}
+                        name="quoteManagerRole"
+                        value={role}
+                        checked={formData.quoteManagerRole === role}
+                        onChange={handleInputChange}
+                        className="h-5 w-5 text-emerald-600 focus:ring-emerald-500 border-gray-300 rounded cursor-pointer"
+                      />
+                      <label
+                        htmlFor={`quote-${role}`}
+                        className="ml-3 text-sm font-medium text-black cursor-pointer"
+                      >
+                        {t(`hotelOwner.${role}`)}
+                      </label>
+                    </div>
+                  ))}
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium text-black mb-2">
+                    {t("hotelOwner.pleaseEnter")}
+                  </label>
+                  <input
+                    name="quoteOtherManagerRole"
+                    value={formData.quoteOtherManagerRole}
+                    onChange={handleInputChange}
+                    className={inputClass}
+                    disabled={formData.quoteManagerRole !== Role.OTHERROLE}
+                  />
+                </div>
+              </div>
+            </div>
+
+            {/* Interview with Manager / Owner Section */}
             <div className="space-y-4">
               <h2 className="text-lg font-semibold text-black">
                 {t("hotelOwner.generalManagerOwner")}
@@ -667,15 +779,15 @@ const HotelOwnerFormpre = () => {
                     <div key={role} className="flex items-center">
                       <input
                         type="radio"
-                        id={`${role}`}
-                        name="managerRole"
+                        id={`interview-${role}`}
+                        name="interviewManagerRole"
                         value={role}
-                        checked={formData.managerRole === role}
+                        checked={formData.interviewManagerRole === role}
                         onChange={handleInputChange}
                         className="h-5 w-5 text-emerald-600 focus:ring-emerald-500 border-gray-300 rounded cursor-pointer"
                       />
                       <label
-                        htmlFor={`${role}`}
+                        htmlFor={`interview-${role}`}
                         className="ml-3 text-sm font-medium text-black cursor-pointer"
                       >
                         {t(`hotelOwner.${role}`)}
@@ -689,12 +801,117 @@ const HotelOwnerFormpre = () => {
                     {t("hotelOwner.pleaseEnter")}
                   </label>
                   <input
-                    name="otherManagerRole"
-                    value={formData.otherManagerRole}
+                    name="interviewOtherManagerRole"
+                    value={formData.interviewOtherManagerRole}
                     onChange={handleInputChange}
                     className={inputClass}
-                    disabled={formData.managerRole !== Role.OTHERROLE}
+                    disabled={formData.interviewManagerRole !== Role.OTHERROLE}
                   />
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium text-black mb-2">
+                    {t("hotelOwner.question1")}
+                  </label>
+
+                  <div className="relative">
+                    <textarea
+                      name="answer1"
+                      value={formData.answer1}
+                      onChange={handleInputChange}
+                      rows={5}
+                      minLength={75}
+                      maxLength={150}
+                      className={textareaClass}
+                    />
+                    <div className="absolute bottom-2 right-2 text-xs text-gray-600">
+                      {t("hotelOwner.maxCharacters", { count: 150 })}
+                    </div>
+                  </div>
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium text-black mb-2">
+                    {t("hotelOwner.question2")}
+                  </label>
+
+                  <div className="relative">
+                    <textarea
+                      name="answer2"
+                      value={formData.answer2}
+                      onChange={handleInputChange}
+                      rows={5}
+                      minLength={75}
+                      maxLength={150}
+                      className={textareaClass}
+                    />
+                    <div className="absolute bottom-2 right-2 text-xs text-gray-600">
+                      {t("hotelOwner.maxCharacters", { count: 150 })}
+                    </div>
+                  </div>
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium text-black mb-2">
+                    {t("hotelOwner.question3")}
+                  </label>
+
+                  <div className="relative">
+                    <textarea
+                      name="answer3"
+                      value={formData.answer3}
+                      onChange={handleInputChange}
+                      rows={5}
+                      minLength={75}
+                      maxLength={150}
+                      className={textareaClass}
+                    />
+                    <div className="absolute bottom-2 right-2 text-xs text-gray-600">
+                      {t("hotelOwner.maxCharacters", { count: 150 })}
+                    </div>
+                  </div>
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium text-black mb-2">
+                    {t("hotelOwner.question4")}
+                  </label>
+
+                  <div className="relative">
+                    <textarea
+                      name="answer4"
+                      value={formData.answer4}
+                      onChange={handleInputChange}
+                      rows={5}
+                      minLength={75}
+                      maxLength={150}
+                      className={textareaClass}
+                    />
+                    <div className="absolute bottom-2 right-2 text-xs text-gray-600">
+                      {t("hotelOwner.maxCharacters", { count: 150 })}
+                    </div>
+                  </div>
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium text-black mb-2">
+                    {t("hotelOwner.question5")}
+                  </label>
+
+                  <div className="relative">
+                    <textarea
+                      name="answer5"
+                      value={formData.answer5}
+                      onChange={handleInputChange}
+                      rows={5}
+                      minLength={75}
+                      maxLength={150}
+                      className={textareaClass}
+                    />
+                    <div className="absolute bottom-2 right-2 text-xs text-gray-600">
+                      {t("hotelOwner.maxCharacters", { count: 150 })}
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -713,7 +930,7 @@ const HotelOwnerFormpre = () => {
 
                 <div className="space-y-3">
                   <p className="text-sm text-black">
-                    {t("hotelOwner.preBookHotelImageDescription")}
+                    {t("hotelOwner.exlBookHotelImageDescription")}
                   </p>
 
                   {/* Book Hotel Images Section */}
@@ -730,7 +947,7 @@ const HotelOwnerFormpre = () => {
                           </span>
                         </div>
                         <span className="text-left">
-                          {t("hotelOwner.preBookHotelNumberOfImagesValue")}
+                          {t("hotelOwner.exlBookHotelNumberOfImagesValue")}
                         </span>
                       </div>
                       <div className="flex justify-start gap-3">
@@ -889,7 +1106,7 @@ const HotelOwnerFormpre = () => {
                           </span>
                         </div>
                         <span className="text-left">
-                          {t("hotelOwner.preWebsiteHotelNumberOfImagesValue")}
+                          {t("hotelOwner.exlWebsiteHotelNumberOfImagesValue")}
                         </span>
                       </div>
                       <div className="flex justify-start gap-3">
@@ -1147,35 +1364,28 @@ const HotelOwnerFormpre = () => {
                     </div>
                   </div>
 
-                  <div>
-                    <label className="block text-sm font-medium text-black mb-2">
-                      {t("hotelOwner.uploadImage")}
-                    </label>
-
-                    <Upload 
-                      style={{ width: "100%" }}
-                      fileList={fileList}
-                      onChange={handleChange}
-                      showUploadList={false}
+                  <Upload 
+                    style={{ width: "100%" }}
+                    fileList={fileList}
+                    onChange={handleChange}
+                    showUploadList={false}
+                  >
+                    <div
+                      className="border border-black focus:outline-none rounded-lg p-3 text-center cursor-pointer transition-all duration-300"
+                      onClick={() => handleChange}
                     >
-                      <div
-                        className="border border-black focus:outline-none rounded-lg p-3 text-center cursor-pointer transition-all duration-300"
-                        onClick={() => handleChange}
-                      >
-                        <div className="flex items-center justify-between">
-                          <div className="text-center flex justify-start items-center gap-2">
-                            <MdPhotoSizeSelectActual className="text-2xl text-[#777777]" />
-                            <p className="text-[#777777] !mb-0">
-                              {t("hotelOwner.dragOrDropImage")}
-                            </p>
-                          </div>
-        
-                          <BsCloudUpload className="text-2xl text-[#777777]" />
+                      <div className="flex items-center justify-between">
+                        <div className="text-center flex justify-start items-center gap-2">
+                          <MdPhotoSizeSelectActual className="text-2xl text-[#777777]" />
+                          <p className="text-[#777777] !mb-0">
+                            {t("hotelOwner.dragOrDropImage")}
+                          </p>
                         </div>
+      
+                        <BsCloudUpload className="text-2xl text-[#777777]" />
                       </div>
-                    </Upload>
-
-                  </div>
+                    </div>
+                  </Upload>
                 </div>
               </div>
             </div>
@@ -1383,4 +1593,4 @@ const HotelOwnerFormpre = () => {
   );
 };
 
-export default HotelOwnerFormpre;
+export default HotelOwnerFormExclusive;

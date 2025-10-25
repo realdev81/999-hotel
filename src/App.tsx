@@ -4,7 +4,8 @@ import Login from './screens/auth/login'
 import HotelOwner from './screens/hetelOwner/hotelOwner'
 import HotelOwnerFormBasic from './components/hotelOwner/HotelOwnerFormBasic'
 import HotelOwnerFormPremium from './components/hotelOwner/HotelOwnerFormPremium'
-import HotelOwnerFormGrand from './components/hotelOwner/HotelOwnerForGrand';
+import HotelOwnerFormGrand from './components/hotelOwner/HotelOwnerFormGrand';
+import HotelOwnerFormExclusive from './components/hotelOwner/HotelOwnerFormExclusive'
 import { useTranslation } from "react-i18next";
 function App() {
 
@@ -19,6 +20,7 @@ function App() {
           <Route path='basic' element={<HotelOwnerFormBasic/>}/>
           <Route path='premium' element={<HotelOwnerFormPremium/>}/>
           <Route path='grand' element={<HotelOwnerFormGrand/>}/>
+          <Route path='exclusive' element={<HotelOwnerFormExclusive/>}/>
         </Route>
         <Route path='*' element={<NotFound/>} />
       </Routes>
